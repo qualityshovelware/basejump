@@ -1,0 +1,71 @@
+<html>
+  <head>
+    <title>QualityShovelWare</title>
+     <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
+     <script src="https://unpkg.com/super-hands/dist/super-hands.min.js"></script>
+     <script src="js/nm/aec.js"></script>
+     <script src="js/nm/aecs.js"></script>
+     <script src="js/nm/afp.js"></script>
+  </head>
+  <body>
+    <!-- btw, use stats if you doing weird shit, thanks! : -->
+    <button onclick="togglePhysics();" style="position: fixed; z-index: 999">toggle physics</button>
+    <a-scene stats id="scen" physics visible="true" style="position: relative; z-index: 0">
+      <a-assets>
+        <img id="stoneTxt" src="img/stone.jpg"></img>
+        <a-mixin class="clickable" id="cube" geometry="primitive: box; width: 1; height: 1; depth: 1" material="src: #stoneTxt"
+                 hoverable grabbable stretchable draggable transparent="true" opacity="0.7"
+                 event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true"
+                 event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false" shadow></a-mixin>
+        <a-mixin id="sphere" geometry="primitive: sphere; radius: 0.4"
+                 hoverable grabbable stretchable draggable
+                 event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true"
+                 event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false"
+                 dynamic-body shadow></a-mixin>
+        <a-mixin id="cone" geometry="primitive: cone; radius-bottom: 0.3, radius-top: 0; height: 1.2"
+                 hoverable grabbable stretchable draggable
+                 event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true"
+                 event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false"
+                 dynamic-body shadow></a-mixin>
+        <a-mixin id="cylinder" geometry="primitive: cylinder; radius: 0.3, height: 0.4"
+                 hoverable grabbable stretchable draggable
+                 event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true"
+                 event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false"
+                 dynamic-body shadow></a-mixin>
+        <a-mixin id="touch"
+                 physics-collider phase-shift
+                 collision-filter="collisionForces: false"
+                 static-body="shape: sphere; sphereRadius: 0.02"
+                 super-hands="colliderEvent: collisions;
+                              colliderEventProperty: els;
+                              colliderEndEvent: collisions;
+                              colliderEndEventProperty: clearedEls;">
+        </a-mixin>
+      </a-assets>
+      <a-entity>
+        <a-camera
+            id="cam" positon="0 1.6 0" raycaster="objects: .clickable"
+            cursor look-controls="pointerLockEnabled: true;"
+            laser-controls="near: 1; showLine: true"
+            line="color: red; opacity: 0.75" controller-cursor
+            intersection-spawn="event: click" wasd-controls="fly: true">
+            <a-sky radius=100 color="#0aa4ff"></a-sky>
+        </a-camera>
+        <a-entity id="rhand" mixin="touch"
+                  vive-controls="hand: right"
+                  oculus-touch-controls="hand: right"
+                  windows-motion-controls="hand: right">
+        </a-entity>
+        <a-entity id="blockHand" mixin="touch" hand-controls="left" laser-controls controller-cursor intersection-spawn="event: click" teleport-controls></a-entity>
+      </a-entity>
+      <!-- make shit not fall -->
+      <a-box class="clickable" static-body width=1024 height=0.001 depth=1024 visible="true" material="src: img/grass.jpg; repeat: 1024 1024" shadow></a-box>
+      <a-entity id="ent-scen"></a-entity>
+    </a-scene>
+    <script src="js/cache.js"></script>
+    <script src="js/entity.js"></script>
+    <script src="js/lib.js"></script>
+    <script src="js/tick.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
