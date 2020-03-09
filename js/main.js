@@ -12,6 +12,9 @@ var currStruct = 0;
 var cache = new Array(0);
 var tickCount = 0;
 var phys = 0;
+var removeClick = 0;
+var matArr = ["stone", "wood"];
+var txtInt = 0;
 
 console.log("[*] init func");
 
@@ -108,18 +111,60 @@ document.querySelector("#rhand").addEventListener('bbuttondown', function () {
 
 console.log("[*] init cam settings")
 
-document.querySelector('#cam').setAttribute("far", 100);
+document.querySelector('#cam').setAttribute("far", 50);
 
 console.log("[*] more event handlers")
 
 document.querySelector('#blockHand').addEventListener("click", spawnEntityWithEVT);
 document.querySelector('#cam').addEventListener("click", function (evt) {
+  var lastEvt = evt;
   spawnEntityWithEVT(evt);
+  distCheck();
 });
+
+window.onkeypress = function (evt) {
+  console.log(evt, evt.charCode);
+  if (evt.charCode === 99) {
+    /*
+      toggles physics if c is pressed
+    */
+    togglePhysics();
+  }
+  else if (evt.charCode === 111) {
+    /*
+      o saves.
+    */
+    console.log("save");
+    saveWorld();
+  }
+  else if (evt.charCode === 112) {
+    /*
+      p loads.
+    */
+    console.log("load");
+    loadWorld();
+  }
+  else if (evt.charCode === 122) {
+    if (removeClick) {
+      removeClick = 0;
+    }
+    else {
+      removeClick = 1;
+    }
+  }
+  else if (evt.charCode === 59) {
+    txtInt--;
+  }
+  else if (evt.charCode === 39) {
+    txtInt++;
+  }
+
+};
 
 
 console.log("[*] more func setup")
 
 var entscene = document.getElementById("ent-scen");
 var cam = document.getElementById("cam");
-setInterval(tick, 200);
+
+setInterval(distCheck, 5000);

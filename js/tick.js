@@ -9,5 +9,4 @@ function tick() {
   if (tickCount % 5 == 0) {
     distCheck();
   }
-  console.log("tick " + tickCount.toString());
 }
