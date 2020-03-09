@@ -119,7 +119,7 @@ document.querySelector('#blockHand').addEventListener("click", spawnEntityWithEV
 document.querySelector('#cam').addEventListener("click", function (evt) {
   var lastEvt = evt;
   spawnEntityWithEVT(evt);
-  distCheck();
+  setTimeout(distCheck, 50);
 });
 
 window.onkeypress = function (evt) {
@@ -176,6 +176,10 @@ window.onkeypress = function (evt) {
 
 };
 
+function stc() {
+  document.getElementById("sky").setAttribute("position", document.getElementById("cam").getAttribute("position"));
+}
+
 
 console.log("[*] more func setup")
 
@@ -183,3 +187,4 @@ var entscene = document.getElementById("ent-scen");
 var cam = document.getElementById("cam");
 
 setInterval(distCheck, 5000);
+setInterval(stc, 100);

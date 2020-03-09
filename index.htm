@@ -50,7 +50,6 @@
             laser-controls="near: 1; showLine: true"
             line="color: red; opacity: 0.75" controller-cursor
             intersection-spawn="event: click" wasd-controls="fly: true">
-            <a-sky radius=100 color="#0aa4ff"></a-sky>
         </a-camera>
         <a-entity id="rhand" mixin="touch"
                   vive-controls="hand: right"
@@ -59,6 +58,7 @@
         </a-entity>
         <a-entity id="blockHand" mixin="touch" hand-controls="left" laser-controls controller-cursor intersection-spawn="event: click" teleport-controls></a-entity>
       </a-entity>
+      <a-sky id="sky" radius=50 material="src: img/sky2.jpg"></a-sky>
       <!-- make shit not fall -->
       <a-box class="clickable" static-body width=1024 height=0.001 depth=1024 visible="true" material="src: img/grass.jpg; repeat: 1024 1024" shadow></a-box>
       <a-entity id="ent-scen"></a-entity>
