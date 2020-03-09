@@ -145,18 +145,33 @@ window.onkeypress = function (evt) {
     loadWorld();
   }
   else if (evt.charCode === 122) {
+    /*
+        z changes between removing and placing
+    */
     if (removeClick) {
-      removeClick = 0;
+      removeClick = 0; // stop removing if removing
     }
     else {
-      removeClick = 1;
+      removeClick = 1; // start removing if not
     }
   }
   else if (evt.charCode === 59) {
+    /*
+      colon semi-colon goes back
+    */
     txtInt--;
+    if (txtInt < 0) {
+      txtInt = 0;
+    }
   }
   else if (evt.charCode === 39) {
+    /*
+      " and ' goes forward
+    */
     txtInt++;
+    if (txtInt > matArr.length) {
+      txtInt = matArr.length;
+    }
   }
 
 };
