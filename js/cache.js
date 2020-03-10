@@ -10,7 +10,6 @@ function distCheck() {
       go through each child
       if code fails, that's fine, just log.
     */
-    console.log("a");
     try {
       /*
         if closer than 20
@@ -31,9 +30,10 @@ function distCheck() {
         entscene.appendChild(cache[i]); // put back in scene
         cache[i] = 0; // take out of cache
         */
-        console.log(ent[i].getAttribute("setdyn"));
+        console.log(ent[i].getAttribute("setdyn"), ent[i].getAttribute("setdyn") == "false");
         if (ent[i].getAttribute("setdyn") == "false") {
-            continue;
+          ent[i].setAttribute("static-body", "true");
+          continue;
         }
         ent[i].removeAttribute("static-body");
         ent[i].setAttribute("dynamic-body", "true");

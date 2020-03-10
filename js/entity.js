@@ -32,8 +32,16 @@ function spawnEntityWithEVT(evt) {
   };
   */
   console.log("fin");
-  entityEl.setAttribute("dynamic-body");
+  if (phys) {
+    entityEl.setAttribute("dynamic-body");
+    entityEl.setAttribute("setdyn", "true");
+  }
+  else {
+    entityEl.setAttribute("static-body");
+    entityEl.setAttribute("setdyn", "false");
+  }
   console.log("fin");
+  console.log(entityEl);
   entityEl.setAttribute("material", "src: img/" + matArr[txtInt] + ".jpg");
   sceneEl.appendChild(entityEl); // add to the scene
   console.log("fin");
