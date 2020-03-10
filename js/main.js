@@ -15,6 +15,7 @@ var phys = 0;
 var removeClick = 0;
 var matArr = ["stone", "wood"];
 var txtInt = 0;
+var snap = 0;
 
 console.log("[*] init func");
 
@@ -171,6 +172,15 @@ window.onkeypress = function (evt) {
     txtInt++;
     if (txtInt > matArr.length) {
       txtInt = matArr.length;
+    }
+  }
+
+  else if (evt.charCode == 116) {
+    if (snap) {
+      snap = 0;
+    }
+    else {
+      snap = 1;
     }
   }
 
