@@ -14,7 +14,16 @@ function spawnEntityWithEVT(evt) {
     sceneEl.removeChild(evt.detail.intersectedEl); // remove styff
     return;
   }
-  entityEl.setAttribute('mixin', 'cube'); // make a cube
+  if (spwn == undefined) {
+    entityEl.setAttribute('mixin', 'cube'); // make a cube
+  }
+  else if (spwn == "import") {
+    entityEl.setAttribute('obj-model', "obj: " + model);
+    entityEl.setAttribute('mixin', spwn);
+  }
+  else {
+    entityEl.setAttribute('mixin', spwn);
+  }
   /*
   else if (window.currStruct == 1) {
     entityEl.setAttribute('mixin', 'sphere'); // set to sphere

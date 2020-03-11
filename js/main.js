@@ -11,11 +11,12 @@ console.log("[*] init vars");
 var currStruct = 0;
 var cache = new Array(0);
 var tickCount = 0;
-var phys = 0;
+var phys = 1;
 var removeClick = 0;
 var matArr = ["stone", "wood"];
 var txtInt = 0;
 var snap = 0;
+var dont = 0;
 
 console.log("[*] init func");
 
@@ -26,22 +27,6 @@ function saveWorld() {
   */
 
   var entScen = document.getElementById("ent-scen");
-  for (i = 0; i < cache.length; i++) {
-    try {
-      if (cache[i] == 0 || cache[i] == undefined) {
-        /*
-          if undefined or set as taken care of by us,
-          do nothing
-        */
-        continue;
-      }
-      entscene.appendChild(cache[i]); // put back in scene
-      cache[i] = 0; // take out of cache
-    }
-    catch (e) {
-      console.log("null " + e); // old error from jank code that we're keeping
-    };
-  }
   for (i = 0; i < entScen.children.length; i++) {
     /*
       because a-frame doesn't update shit
@@ -124,7 +109,7 @@ document.querySelector('#cam').addEventListener("click", function (evt) {
 });
 
 window.onkeypress = function (evt) {
-  console.log(evt, evt.charCode);
+  console.log(evt);
   if (evt.charCode === 99) {
     /*
       toggles physics if c is pressed
@@ -183,8 +168,20 @@ window.onkeypress = function (evt) {
       snap = 1;
     }
   }
+  else if (evt.charCode == 93) {
+    toggleMenu();
+  }
 
 };
+
+function toggleMenu() {
+  if (menu.getAttribute("style") == "position: fixed; z-index: 999") {
+    menu.setAttribute("style", "position: fixed; z-index: 0");
+  }
+  else {
+    menu.setAttribute("style", "position: fixed; z-index: 999");
+  }
+}
 
 function stc() {
   document.getElementById("sky").setAttribute("position", document.getElementById("cam").getAttribute("position"));
@@ -195,6 +192,27 @@ console.log("[*] more func setup")
 
 var entscene = document.getElementById("ent-scen");
 var cam = document.getElementById("cam");
+var spwn = undefined;
+var model = "";
 
 setInterval(distCheck, 5000);
 setInterval(stc, 100);
+
+function spawn(id) {
+  console.log(id.substr(0,3));
+  if (id == 0) {
+    spwn = undefined;
+    return;
+  }
+  else if (id.substr(0,3) == "#I;") {
+    spwn = "import";
+    window.model = id.substr(3);
+    console.log(dont);
+    if (dont) {
+      document.getElementById("menu").innerHTML += "<button class=\"menuObject\" onclick=\"window.dont = 0; spawn('#I; " + id.substr(3) + "');\">" + id.substr(3) + "</button><br>";
+    };
+  }
+  else {
+    spwn = id;
+  }
+}

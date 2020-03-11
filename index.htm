@@ -8,21 +8,31 @@
      <script src="js/nm/afp.js"></script>
      <script>
      </script>
+     <style>
+      .menuObject {
+        font-size: 24;
+      }
+      </style>
   </head>
   <body>
     <!-- btw, use stats if you doing weird shit, thanks! : -->
-    <button onclick="togglePhysics();" style="position: fixed; z-index: 999">toggle physics</button>
+    <div id="menu" style="position: fixed; z-index: 0">
+      <button class="menuObject" onclick="spawn('bird');">BIRD</button><br>
+      <button class="menuObject" onclick="spawn('sphere');">SPHERE</button><br>
+      <button class="menuObject" onclick="spawn(0);">Back to normal</button><br>
+      <button class="menuObject" onclick="spawn('#I;' + prompt('url')); window.dont = 0;">IMPORT</button><br>
+    </div>
     <a-scene stats id="scen" physics visible="true" style="position: relative; z-index: 0">
       <a-assets>
         <img id="stoneTxt" src="img/stone.jpg"></img>
         <img id="woodTxt" src="img/wood.jpg"></img>
         <a-mixin class="clickable" id="cube" geometry="primitive: box; width: 1; height: 1; depth: 1" material="src: #stoneTxt"
                  hoverable grabbable stretchable draggable shadow></a-mixin>
-        <a-mixin id="sphere" geometry="primitive: sphere; radius: 0.4"
+        <a-mixin id="sphere" geometry="primitive: sphere; radius: 0.7"
                  hoverable grabbable stretchable draggable
                  event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true"
                  event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false"
-                 dynamic-body shadow></a-mixin>
+                 shadow></a-mixin>
         <a-mixin id="cone" geometry="primitive: cone; radius-bottom: 0.3, radius-top: 0; height: 1.2"
                  hoverable grabbable stretchable draggable
                  event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true"
@@ -33,6 +43,7 @@
                  event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true"
                  event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false"
                  dynamic-body shadow></a-mixin>
+        <a-mixin id="import" shadow></a-mixin>
         <a-mixin id="touch"
                  physics-collider phase-shift
                  collision-filter="collisionForces: false"
@@ -49,7 +60,7 @@
             cursor look-controls="pointerLockEnabled: true;"
             laser-controls="near: 1; showLine: true"
             line="color: red; opacity: 0.75" controller-cursor
-            intersection-spawn="event: click" wasd-controls="fly: true">
+            intersection-spawn="event: click" wasd-controls="fly: true" static-body>
         </a-camera>
         <a-entity id="rhand" mixin="touch"
                   vive-controls="hand: right"

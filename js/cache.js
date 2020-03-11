@@ -30,7 +30,6 @@ function distCheck() {
         entscene.appendChild(cache[i]); // put back in scene
         cache[i] = 0; // take out of cache
         */
-        console.log(ent[i].getAttribute("setdyn"), ent[i].getAttribute("setdyn") == "false");
         if (ent[i].getAttribute("setdyn") == "false") {
           ent[i].setAttribute("static-body", "true");
           continue;
