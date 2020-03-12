@@ -214,7 +214,7 @@ setInterval(stc, 100);
 
 function spawn(id) {
   console.log(id.substr(0,3)); // for debug, just shows first 3 chars
-  else if (id.substr(0,3) == "#I;") {
+  if (id.substr(0,3) == "#I;") {
     /*
       #I; indicates importing a 3d model url
       todo: make a mixin with the model so each one isn't a request
