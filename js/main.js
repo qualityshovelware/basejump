@@ -14,7 +14,7 @@ var tickCount = 0;
 var phys = 1;
 var removeClick = 0;
 var matArr = ["stone", "wood"];
-var objArr = ["cube", "sphere", "cone", "cylinder"];
+var objArr = ["cube", "sphere", "cone", "cylinder", "import"];
 var objToSpwn = 0;
 var txtInt = 0;
 var snap = 0;
@@ -164,6 +164,9 @@ window.onkeypress = function (evt) {
   }
 
   else if (evt.charCode == 116) {
+    /*
+      t enables and disabels snap
+    */
     if (snap) {
       snap = 0;
     }
@@ -172,22 +175,23 @@ window.onkeypress = function (evt) {
     }
   }
   else if (evt.charCode == 93) {
-    if (toggleMenu() == 1) {
-      document.exitPointerLock();
-    }
-    else {
-      document.getElementById("scen").requestPointerLock();
-    }
+    toggleMenu();
   }
 
 };
 
 function toggleMenu() {
   if (menu.getAttribute("style") == "position: fixed; z-index: 999") {
+    /*
+      if on top, put on bottom
+    */
     menu.setAttribute("style", "position: fixed; z-index: 0");
     return 0;
   }
   else {
+    /*
+      if on bottom, put on top
+    */
     menu.setAttribute("style", "position: fixed; z-index: 999");
     return 1;
   }
@@ -209,12 +213,12 @@ setInterval(distCheck, 5000);
 setInterval(stc, 100);
 
 function spawn(id) {
-  console.log(id.substr(0,3));
-  if (id == 0) {
-    spwn = undefined;
-    return;
-  }
+  console.log(id.substr(0,3)); // for debug, just shows first 3 chars
   else if (id.substr(0,3) == "#I;") {
+    /*
+      #I; indicates importing a 3d model url
+      todo: make a mixin with the model so each one isn't a request
+    */
     spwn = "import";
     window.model = id.substr(3);
     console.log(dont);
@@ -223,12 +227,22 @@ function spawn(id) {
     };
   }
   else {
+    /*
+      if nothing else, just use the mixin specified
+    */
     spwn = id;
   }
 }
 
 function onWheel(evt) {
+  if (objArr[tool] == "import") {
+    menu.setAttribute("style", "position: fixed; z-index: 0");
+  }
   if (evt.deltaY < 0) {
+    /*
+      if moving down
+      go back
+    */
     tool--;
     if (tool < 0) {
       tool = objArr.length;
@@ -237,6 +251,21 @@ function onWheel(evt) {
   else {
     tool++;
     tool %= objArr.length;
+  }
+  if (objArr[tool] == "import") {
+    /*
+      if moving up
+      go forwards
+    */
+    if (menu.getAttribute("style") == "position: fixed; z-index: 999") {
+      /*
+        do nothing
+      */
+    }
+    else {
+      menu.setAttribute("style", "position: fixed; z-index: 999");
+      document.exitPointerLock();
+    }
   }
   spwn = objArr[tool % objArr.length];
   spwnIndicator.innerText = spwn;

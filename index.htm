@@ -16,6 +16,7 @@
   </head>
   <body>
     <!-- btw, use stats if you doing weird shit, thanks! : -->
+    <div>
     <h1 id="spwnIndicator" style="font-family: Arial; color: white; position: fixed; z-index: 1000"></h1>
     <div id="menu" style="position: fixed; z-index: 0">
       <button class="menuObject" onclick="spawn('sphere');">SPHERE</button><br>
@@ -74,6 +75,7 @@
       <a-box class="clickable" static-body width=1024 height=0.001 depth=1024 visible="true" material="src: img/grass.jpg; repeat: 1024 1024; " shadow></a-box>
       <a-entity id="ent-scen"></a-entity>
     </a-scene>
+    </div>
     <script src="js/cache.js"></script>
     <script src="js/entity.js"></script>
     <script src="js/lib.js"></script>
