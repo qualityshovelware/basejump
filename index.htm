@@ -23,7 +23,7 @@
       <button class="menuObject" onclick="spawn('cube');">CUBE</button><br>
       <button class="menuObject" onclick="window.dont = 1; spawn('#I;' + prompt('url')); window.dont = 0;">IMPORT</button><br>
     </div>
-    <a-scene id="scen" physics visible="true" style="position: relative; z-index: 0" shadow>
+    <a-scene id="scen" physics visible="true" style="position: relative; z-index: 0" fog="color: #0aa4ff; far: 80" shadow>
       <a-assets>
         <img id="stoneTxt" src="img/stone.jpg"></img>
         <img id="woodTxt" src="img/wood.jpg"></img>
