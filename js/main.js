@@ -1,5 +1,5 @@
 /*
-  QualityShovelWare v_nil
+  basejump v_nil
   broken code :)
   plz dont lek
 */
@@ -14,9 +14,12 @@ var tickCount = 0;
 var phys = 1;
 var removeClick = 0;
 var matArr = ["stone", "wood"];
+var objArr = ["cube", "sphere", "cone", "cylinder"];
+var objToSpwn = 0;
 var txtInt = 0;
 var snap = 0;
 var dont = 0;
+var tool = 0;
 
 console.log("[*] init func");
 
@@ -169,7 +172,12 @@ window.onkeypress = function (evt) {
     }
   }
   else if (evt.charCode == 93) {
-    toggleMenu();
+    if (toggleMenu() == 1) {
+      document.exitPointerLock();
+    }
+    else {
+      document.getElementById("scen").requestPointerLock();
+    }
   }
 
 };
@@ -177,9 +185,11 @@ window.onkeypress = function (evt) {
 function toggleMenu() {
   if (menu.getAttribute("style") == "position: fixed; z-index: 999") {
     menu.setAttribute("style", "position: fixed; z-index: 0");
+    return 0;
   }
   else {
     menu.setAttribute("style", "position: fixed; z-index: 999");
+    return 1;
   }
 }
 
@@ -216,3 +226,21 @@ function spawn(id) {
     spwn = id;
   }
 }
+
+function onWheel(evt) {
+  if (evt.deltaY < 0) {
+    tool--;
+    if (tool < 0) {
+      tool = objArr.length;
+    };
+  }
+  else {
+    tool++;
+    tool %= objArr.length;
+  }
+  spwn = objArr[tool % objArr.length];
+  spwnIndicator.innerText = spwn;
+  console.log(tool);
+}
+
+document.onwheel = onWheel;

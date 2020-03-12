@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>QualityShovelWare</title>
+    <title>basejump</title>
      <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
      <script src="https://unpkg.com/super-hands/dist/super-hands.min.js"></script>
      <script src="js/nm/aec.js"></script>
@@ -10,19 +10,19 @@
      </script>
      <style>
       .menuObject {
-        font-size: 24;
+        font-size: 24pt;
       }
       </style>
   </head>
   <body>
     <!-- btw, use stats if you doing weird shit, thanks! : -->
+    <h1 id="spwnIndicator" style="font-family: Arial; color: white; position: fixed; z-index: 1000"></h1>
     <div id="menu" style="position: fixed; z-index: 0">
-      <button class="menuObject" onclick="spawn('bird');">BIRD</button><br>
       <button class="menuObject" onclick="spawn('sphere');">SPHERE</button><br>
-      <button class="menuObject" onclick="spawn(0);">Back to normal</button><br>
-      <button class="menuObject" onclick="spawn('#I;' + prompt('url')); window.dont = 0;">IMPORT</button><br>
+      <button class="menuObject" onclick="spawn('cube');">CUBE</button><br>
+      <button class="menuObject" onclick="window.dont = 1; spawn('#I;' + prompt('url')); window.dont = 0;">IMPORT</button><br>
     </div>
-    <a-scene stats id="scen" physics visible="true" style="position: relative; z-index: 0">
+    <a-scene id="scen" physics visible="true" style="position: relative; z-index: 0" shadow>
       <a-assets>
         <img id="stoneTxt" src="img/stone.jpg"></img>
         <img id="woodTxt" src="img/wood.jpg"></img>
@@ -71,7 +71,7 @@
       </a-entity>
       <a-sky id="sky" radius=50 material="src: img/sky2.jpg"></a-sky>
       <!-- make shit not fall -->
-      <a-box class="clickable" static-body width=1024 height=0.001 depth=1024 visible="true" material="src: img/grass.jpg; repeat: 1024 1024" shadow></a-box>
+      <a-box class="clickable" static-body width=1024 height=0.001 depth=1024 visible="true" material="src: img/grass.jpg; repeat: 1024 1024; " shadow></a-box>
       <a-entity id="ent-scen"></a-entity>
     </a-scene>
     <script src="js/cache.js"></script>
