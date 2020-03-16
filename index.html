@@ -11,17 +11,21 @@
      <style>
       .menuObject {
         font-size: 24pt;
+        border: none;
+        background-color: #00000000;
+		overflow-wrap: break-word;
       }
       </style>
   </head>
   <body>
     <!-- btw, use stats if you doing weird shit, thanks! : -->
-    <div>
-    <h1 id="spwnIndicator" style="font-family: Arial; color: white; position: fixed; z-index: 1000"></h1>
-    <div id="menu" style="position: fixed; z-index: 0">
-      <button class="menuObject" onclick="spawn('sphere');">SPHERE</button><br>
-      <button class="menuObject" onclick="spawn('cube');">CUBE</button><br>
-      <button class="menuObject" onclick="window.dont = 1; spawn('#I;' + prompt('url')); window.dont = 0;">IMPORT</button><br>
+    <div style="width: 100%">
+    <div id="menu" style="position: fixed; z-index: 0; width: 100%">
+      <button class="menuObject" onclick="spawn('sphere');"><img src="img/sphricn.png" style="width: 128px"></img></button>
+      <button class="menuObject" onclick="spawn('cube');"><img src="img/cubeicn.png" style="width: 128px"></img></button>
+      <button class="menuObject" onclick="window.spwnObjButton = 1; spawn('#I;' + prompt('url')); window.spwnObjButton = 0;">IMPORT</button>
+	    <br>
+      <h1 id="spwnIndicator" style="font-family: Arial; color: white; position: fixed; z-index: 1000"></h1>
     </div>
     <a-scene id="scen" physics visible="true" style="position: relative; z-index: 0" fog="color: #0aa4ff; far: 80" shadow>
       <a-assets>

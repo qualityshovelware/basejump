@@ -18,7 +18,7 @@ var objArr = ["cube", "sphere", "cone", "cylinder", "import"];
 var objToSpwn = 0;
 var txtInt = 0;
 var snap = 0;
-var dont = 0;
+spwnObjButton = 0;
 var tool = 0;
 
 console.log("[*] init func");
@@ -221,9 +221,9 @@ function spawn(id) {
     */
     spwn = "import";
     window.model = id.substr(3);
-    console.log(dont);
-    if (dont) {
-      document.getElementById("menu").innerHTML += "<button class=\"menuObject\" onclick=\"window.dont = 0; spawn('#I; " + id.substr(3) + "');\">" + id.substr(3) + "</button><br>";
+    console.log(window.spwnObjButton);
+    if (window.spwnObjButton) {
+      document.getElementById("menu").innerHTML += "<button class=\"menuObject\" onclick=\"window.spwnObjButton = 0; spawn('#I; " + id.substr(3) + "');\">" + id.substr(3) + "</button><br>";
     };
   }
   else {
